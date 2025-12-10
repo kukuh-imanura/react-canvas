@@ -1,10 +1,10 @@
-interface I {
+interface GameLoops {
   draw: (alpha: number) => void;
   update: (dt: number) => void;
   fps?: number;
 }
 
-const gameLoops = ({ draw, update, fps = 60 }: I) => {
+const gameLoops = ({ draw, update, fps = 60 }: GameLoops) => {
   let animationId: number;
   let last = performance.now();
   let accumulator = 0;

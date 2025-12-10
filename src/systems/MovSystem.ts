@@ -1,6 +1,6 @@
 import type { ECS } from '../types/ecs';
 
-const MovementSystem = (ecs: ECS) => {
+const MovSystem = (ecs: ECS) => {
   return (dt: number) => {
     for (const [id, pos] of ecs.Position) {
       const vel = ecs.Velocity.get(id);
@@ -12,4 +12,4 @@ const MovementSystem = (ecs: ECS) => {
   };
 };
 
-export default MovementSystem;
+export default MovSystem;

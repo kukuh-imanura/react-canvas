@@ -1,6 +1,6 @@
 import type { ECS } from '../types/ecs';
 
-const prevPosSystem = (ecs: ECS) => {
+const PrevPosSystem = (ecs: ECS) => {
   return (dt: number) => {
     for (const [id, pos] of ecs.Position) {
       const prev = ecs.PrevPosition.get(id);
@@ -15,4 +15,4 @@ const prevPosSystem = (ecs: ECS) => {
   };
 };
 
-export default prevPosSystem;
+export default PrevPosSystem;

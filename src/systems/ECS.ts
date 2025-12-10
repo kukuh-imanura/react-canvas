@@ -1,13 +1,33 @@
-const ECS = () => {
+import type {
+  ECS as ECS_Type,
+  EnemyTag,
+  Input,
+  PlayerTag,
+  Position,
+  PrevPosition,
+  Renderable,
+  Size,
+  StaticBody,
+  Velocity,
+} from '../types/ecs';
+
+const ECS = (): ECS_Type => {
   const entities: number[] = [];
   let nextId = 0;
 
   // COMPONENT STORAGE
-  const Position = new Map<number, { x: number; y: number }>();
-  const PrevPosition = new Map<number, { x: number; y: number }>();
-  const Size = new Map<number, { w: number; h: number }>();
-  const Velocity = new Map<number, { vx: number; vy: number }>();
-  const Color = new Map<number, { c: string }>();
+  const Position = new Map<number, Position>();
+  const PrevPosition = new Map<number, PrevPosition>();
+  const Size = new Map<number, Size>();
+  const Velocity = new Map<number, Velocity>();
+
+  const Renderable = new Map<number, Renderable>();
+
+  const PlayerTag = new Map<number, PlayerTag>();
+  const EnemyTag = new Map<number, EnemyTag>();
+  const StaticBody = new Map<number, StaticBody>();
+
+  const Input = new Map<number, Input>();
 
   const systems: ((dt: number) => void)[] = [];
 
@@ -33,7 +53,16 @@ const ECS = () => {
     PrevPosition,
     Size,
     Velocity,
-    Color,
+
+    Renderable,
+
+    PlayerTag,
+    EnemyTag,
+    StaticBody,
+
+    Input,
+
+    // Terrain: new Map(),
   };
 };
 
