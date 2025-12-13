@@ -18,8 +18,8 @@ export interface Velocity {
   vy: number;
 }
 
-export interface TextPos {
-  char: string;
+export interface Param {
+  char?: string;
   fx: number;
   fy: number;
   fw: number;
@@ -38,7 +38,7 @@ export type Renderable =
       fx: number;
       fy: number;
     }
-  | { type: 'text'; atlas: HTMLImageElement; scale: number; pos: TextPos[] };
+  | { type: 'text'; atlas: HTMLImageElement; scale: number; params: Param[] };
 
 export interface PlayerTag {
   isPlayer: boolean;

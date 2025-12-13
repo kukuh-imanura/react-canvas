@@ -2,7 +2,7 @@ import createArc from '../entities/createArc';
 import createImage from '../entities/createImage';
 import createPlayer from '../entities/createPlayer';
 import createRect from '../entities/createRect';
-import createText from '../fonts/createText';
+import createText from '../entities/createText';
 import type { ECS } from '../types/ecs';
 
 const MainScene = (ecs: ECS, ctx: CanvasRenderingContext2D) => {

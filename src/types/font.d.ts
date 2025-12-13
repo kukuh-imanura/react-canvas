@@ -1,55 +1,47 @@
-import type { ECS } from './ecs';
+import type { Position, Size } from './ecs';
 
-export interface FontMap {
-  [key: string]: { layer: string; frame: number };
-}
+interface Frame extends Position, Size {}
+
+interface SpriteSourceSize extends Position, Size {}
+
+type SourceSize = Size;
 
 export interface Frames {
   [key: string]: {
-    frame: {
-      x: number;
-      y: number;
-      w: number;
-      h: number;
-    };
+    frame: Frame;
     rotated: boolean;
     trimmed: boolean;
-    spriteSourceSize: {
-      x: number;
-      y: number;
-      w: number;
-      h: number;
-    };
-    sourceSize: {
-      w: number;
-      h: number;
-    };
+    spriteSourceSize: SpriteSourceSize;
+    sourceSize: SourceSize;
     duration: number;
   };
 }
 
-export type Align = 'left' | 'center' | 'right' | 'justify';
+export interface Glyph {
+  fx: number;
+  fy: number;
+  fw: number;
+  fh: number;
+  offsetY: number;
+}
 
-interface BaseTextOptions {
+export interface Font {
+  atlas: HTMLImageElement;
+  map: Record<string, Glyph>;
+  lineHeight: number;
+}
+
+export interface Layout {
   text: string;
   x: number;
   y: number;
-  w: number;
+  maxW: number;
   scale: number;
-  align: Align;
 }
 
-export interface LayoutTextOptions {
+export interface MeasureWord {
+  i: number;
   text: string;
-  x: number;
-  y: number;
-  w: number;
+  map: Record<string, Glyph>;
   scale: number;
-  align: Align;
-}
-
-export interface CreateTextOptions
-  extends Omit<LayoutTextOptions, 'w' | 'scale' | 'align'>,
-    Partial<Pick<LayoutTextOptions, 'w' | 'scale' | 'align'>> {
-  ecs: ECS;
 }

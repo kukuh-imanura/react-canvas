@@ -54,7 +54,7 @@ const RenderSystem = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
         case 'text':
           if (!size) return;
 
-          for (const p of render.pos) {
+          for (const p of render.params) {
             ctx.drawImage(
               render.atlas,
               p.fx,
