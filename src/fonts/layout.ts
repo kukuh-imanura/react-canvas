@@ -1,5 +1,5 @@
-import type { Param } from '../types/ecs';
-import type { Layout, MeasureWord } from '../types/font';
+import type { TextData } from '../types/ecs';
+import type { Layout, MeasureWord } from '../types/fonts';
 import font from './font';
 
 const GAP = 1;
@@ -8,7 +8,7 @@ const SPACE = GAP * 2;
 const layout = ({ text, x, y, maxW, scale }: Layout) => {
   const { map, lineHeight } = font();
 
-  const params: Param[] = [];
+  const data: TextData[] = [];
 
   let charX = x;
   let charY = y;
@@ -42,7 +42,7 @@ const layout = ({ text, x, y, maxW, scale }: Layout) => {
 
     const { fx, fy, fw, fh, offsetY } = map[char] || map['?'];
 
-    params.push({
+    data.push({
       // char, // untuk debug
       fx,
       fy,
@@ -56,7 +56,7 @@ const layout = ({ text, x, y, maxW, scale }: Layout) => {
   }
 
   const textHeight = charY - y + (lineHeight + GAP) * scale;
-  return { params, textHeight };
+  return { data, textHeight };
 };
 export default layout;
 

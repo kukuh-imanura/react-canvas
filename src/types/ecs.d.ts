@@ -3,11 +3,6 @@ export interface Position {
   y: number;
 }
 
-export interface PrevPosition {
-  x: number;
-  y: number;
-}
-
 export interface Size {
   w: number;
   h: number;
@@ -18,7 +13,7 @@ export interface Velocity {
   vy: number;
 }
 
-export interface Param {
+export interface TextData {
   char?: string;
   fx: number;
   fy: number;
@@ -38,7 +33,12 @@ export type Renderable =
       fx: number;
       fy: number;
     }
-  | { type: 'text'; atlas: HTMLImageElement; scale: number; params: Param[] };
+  | {
+      type: 'text';
+      atlas: HTMLImageElement;
+      scale: number;
+      data: TextData[];
+    };
 
 export interface PlayerTag {
   isPlayer: boolean;
@@ -68,8 +68,9 @@ export interface ECS {
   addSystem: (fn: (dt: number) => void) => void;
   update: (dt: number) => void;
 
+  // Required
   Position: Map<number, Position>;
-  PrevPosition: Map<number, PrevPosition>;
+  PrevPosition: Map<number, Position>;
   Size: Map<number, Size>;
   Velocity: Map<number, Velocity>;
 

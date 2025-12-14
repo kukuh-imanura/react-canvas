@@ -1,70 +1,14 @@
-import type { ECS } from '../types/ecs';
+import type { CreateImageOption } from '../types/entities';
+import createImage from './factories/createImage';
 
-interface CreatePlayer {
-  ecs: ECS;
-  src: string;
-  x: number;
-  y: number;
-  vx?: number;
-  vy?: number;
-  scale?: number;
-  frame?: number;
-  frameH?: number;
-  frameV?: number;
-}
+const createPlayer = (option: CreateImageOption) => {
+  const { ecs, vx, vy } = option;
 
-const createPlayer = ({
-  ecs,
-  src,
-  x,
-  y,
-  vx,
-  vy,
-  scale = 1,
-  frame = 0,
-  frameH,
-  frameV,
-}: CreatePlayer) => {
-  const id = ecs.createEntity();
+  const id = createImage(option);
 
-  const image = new Image();
-  image.src = src;
-
-  image.onload = () => {
-    let fx = 0;
-    let fy = 0;
-    let w = image.width;
-    let h = image.height;
-
-    if (frameH && frameV) {
-      w = image.width / frameH;
-      h = image.height / frameV;
-
-      const maxFrame = frameH * frameV - 1;
-      const safeFrame = Math.min(Math.max(frame, 0), maxFrame);
-
-      const horizontal = safeFrame % frameH;
-      const vertical = Math.floor(safeFrame / frameH);
-
-      fx = horizontal * w;
-      fy = vertical * h;
-    }
-
-    ecs.Renderable.set(id, { type: 'image', image, fx, fy, scale });
-
-    ecs.Position.set(id, { x, y });
-    ecs.PrevPosition.set(id, { x, y });
-    ecs.Size.set(id, { w: Math.round(w), h: Math.round(h) });
-    ecs.Velocity.set(id, { vx: 0, vy: 0 });
-
-    ecs.PlayerTag.set(id, { isPlayer: true });
-
-    ecs.Input.set(id, {});
-
-    if (vx !== undefined || vy !== undefined) {
-      ecs.Velocity.set(id, { vx: vx ?? 0, vy: vy ?? 0 });
-    }
-  };
+  ecs.Velocity.set(id, { vx: vx ?? 0, vy: vy ?? 0 });
+  ecs.PlayerTag.set(id, { isPlayer: true });
+  ecs.Input.set(id, {});
 
   return id;
 };

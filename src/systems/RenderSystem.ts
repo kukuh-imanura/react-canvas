@@ -9,20 +9,20 @@ const RenderSystem = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
       const prev = ecs.PrevPosition.get(id);
       const render = ecs.Renderable.get(id);
 
-      if (!render || !prev) continue;
+      if (!render || !prev || !size) continue;
 
       const x = prev.x + (pos.x - prev.x) * alpha;
       const y = prev.y + (pos.y - prev.y) * alpha;
 
       switch (render.type) {
         case 'rect':
-          if (!size) break;
-
           ctx.fillStyle = render.color || 'black';
           ctx.fillRect(Math.round(x), Math.round(y), size.w, size.h);
           break;
 
         case 'circle':
+          render.radius = render.radius || size.h / 2 || size.w / 2;
+
           ctx.beginPath();
           ctx.fillStyle = render.color || 'black';
           ctx.arc(
@@ -36,8 +36,6 @@ const RenderSystem = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
           break;
 
         case 'image':
-          if (!size) break;
-
           ctx.drawImage(
             render.image,
             render.fx || 0, // frame x
@@ -52,19 +50,19 @@ const RenderSystem = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
           break;
 
         case 'text':
-          if (!size) return;
+          if (!size) break;
 
-          for (const p of render.params) {
+          for (const d of render.data) {
             ctx.drawImage(
               render.atlas,
-              p.fx,
-              p.fy,
-              p.fw,
-              p.fh,
-              Math.round(p.x),
-              Math.round(p.y),
-              p.fw * render.scale,
-              p.fh * render.scale
+              d.fx,
+              d.fy,
+              d.fw,
+              d.fh,
+              Math.round(d.x),
+              Math.round(d.y),
+              d.fw * render.scale,
+              d.fh * render.scale
             );
           }
 

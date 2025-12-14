@@ -1,4 +1,4 @@
-import type { Font, Frames, Glyph } from '../types/font';
+import type { Font, Frames, Glyph } from '../types/fonts';
 import data from './04B03.json';
 
 let cachedFont: Font | null = null;

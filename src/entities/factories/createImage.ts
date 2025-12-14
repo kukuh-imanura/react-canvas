@@ -1,30 +1,19 @@
-import type { ECS } from '../types/ecs';
+import type { CreateImageOption } from '../../types/entities';
 
-interface CreateImage {
-  ecs: ECS;
-  src: string;
-  x: number;
-  y: number;
-  vx?: number;
-  vy?: number;
-  scale?: number;
-  frame?: number;
-  frameH?: number;
-  frameV?: number;
-}
+const createImage = (options: CreateImageOption) => {
+  const {
+    ecs,
+    src,
+    x,
+    y,
+    vx,
+    vy,
+    scale = 1,
+    frame = 0,
+    frameH,
+    frameV,
+  } = options;
 
-const createImage = ({
-  ecs,
-  src,
-  x,
-  y,
-  vx,
-  vy,
-  scale = 1,
-  frame = 0,
-  frameH,
-  frameV,
-}: CreateImage) => {
   const id = ecs.createEntity();
 
   const image = new Image();

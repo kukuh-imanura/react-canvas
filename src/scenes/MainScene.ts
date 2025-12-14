@@ -1,7 +1,7 @@
-import createArc from '../entities/createArc';
-import createImage from '../entities/createImage';
+import createArc from '../entities/factories/createArc';
+import createImage from '../entities/factories/createImage';
 import createPlayer from '../entities/createPlayer';
-import createRect from '../entities/createRect';
+import createRect from '../entities/factories/createRect';
 import createText from '../entities/createText';
 import type { ECS } from '../types/ecs';
 
@@ -14,7 +14,7 @@ const MainScene = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
     y: 0,
     w: 100,
     h: 100,
-    vx: -100,
+    // vx: -100,
   });
 
   createArc({
@@ -22,7 +22,7 @@ const MainScene = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
     x: 0,
     y: canvas.height - 100,
     radius: 50,
-    vx: 100,
+    // vx: 100,
   });
 
   createImage({

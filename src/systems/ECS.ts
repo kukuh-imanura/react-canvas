@@ -4,7 +4,6 @@ import type {
   Input,
   PlayerTag,
   Position,
-  PrevPosition,
   Renderable,
   Size,
   StaticBody,
@@ -17,7 +16,7 @@ const ECS = (): ECS_Type => {
 
   // COMPONENT STORAGE
   const Position = new Map<number, Position>();
-  const PrevPosition = new Map<number, PrevPosition>();
+  const PrevPosition = new Map<number, Position>();
   const Size = new Map<number, Size>();
   const Velocity = new Map<number, Velocity>();
 

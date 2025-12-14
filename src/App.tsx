@@ -27,9 +27,10 @@ const App = () => {
     ecs.addSystem(MovSystem(ecs));
 
     const loop = gameLoops({
-      update: ecs.update,
       draw: RenderSystem(ecs, ctx),
+      update: ecs.update,
     });
+
     loop.start();
 
     setTimeout(() => {
