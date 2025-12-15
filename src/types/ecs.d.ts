@@ -37,7 +37,7 @@ export type Renderable =
       type: 'text';
       atlas: HTMLImageElement;
       scale: number;
-      data: TextData[];
+      datas: TextData[];
     };
 
 export interface PlayerTag {

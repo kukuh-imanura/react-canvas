@@ -1,12 +1,11 @@
-import type { CreateRectOption } from '../../types/entities';
+import type { CreateRect } from '../../types/entities';
 
-const createRect = (options: CreateRectOption) => {
+const createRect = (options: CreateRect) => {
   const { ecs, x, y, w, h, vx, vy, color } = options;
 
   const id = ecs.createEntity();
 
   ecs.Renderable.set(id, { type: 'rect', color });
-
   ecs.Position.set(id, { x, y });
   ecs.PrevPosition.set(id, { x, y });
   ecs.Size.set(id, { w, h });

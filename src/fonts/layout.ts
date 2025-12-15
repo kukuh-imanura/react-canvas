@@ -8,10 +8,11 @@ const SPACE = GAP * 2;
 const layout = ({ text, x, y, maxW, scale }: Layout) => {
   const { map, lineHeight } = font();
 
-  const data: TextData[] = [];
+  const datas: TextData[] = [];
 
   let charX = x;
   let charY = y;
+  let textWidth = 0;
 
   text = text.replace(/\s*\n\s*/g, '\n');
   text = text.replace(/ +/g, ' ');
@@ -42,21 +43,24 @@ const layout = ({ text, x, y, maxW, scale }: Layout) => {
 
     const { fx, fy, fw, fh, offsetY } = map[char] || map['?'];
 
-    data.push({
+    const nextX = charX + fw * scale;
+    textWidth = textWidth > nextX ? textWidth : nextX;
+
+    datas.push({
       // char, // untuk debug
       fx,
       fy,
       fw,
       fh,
       x: charX,
-      y: charY + offsetY,
+      y: charY + offsetY * scale,
     });
 
-    charX += fw * scale + 1;
+    charX += (fw + 1) * scale;
   }
 
   const textHeight = charY - y + (lineHeight + GAP) * scale;
-  return { data, textHeight };
+  return { datas, textHeight, textWidth };
 };
 export default layout;
 

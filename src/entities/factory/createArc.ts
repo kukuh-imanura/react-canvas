@@ -1,13 +1,12 @@
-import type { CreateArcOption } from '../../types/entities';
+import type { CreateArc } from '../../types/entities';
 
-const createArc = (options: CreateArcOption) => {
+const createArc = (options: CreateArc) => {
   const { ecs, radius, x, y, vx, vy, color } = options;
   const s = 2 * radius;
 
   const id = ecs.createEntity();
 
   ecs.Renderable.set(id, { type: 'circle', radius, color });
-
   ecs.Position.set(id, { x, y });
   ecs.PrevPosition.set(id, { x, y });
   ecs.Size.set(id, { w: s, h: s });

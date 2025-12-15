@@ -1,6 +1,6 @@
-import type { CreateImageOption } from '../../types/entities';
+import type { CreateImage } from '../../types/entities';
 
-const createImage = (options: CreateImageOption) => {
+const createImage = (options: CreateImage) => {
   const {
     ecs,
     src,
@@ -40,7 +40,6 @@ const createImage = (options: CreateImageOption) => {
     }
 
     ecs.Renderable.set(id, { type: 'image', image, fx, fy, scale });
-
     ecs.Position.set(id, { x, y });
     ecs.PrevPosition.set(id, { x, y });
     ecs.Size.set(id, { w: Math.round(w), h: Math.round(h) });

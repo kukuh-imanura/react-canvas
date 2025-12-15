@@ -4,12 +4,14 @@ const RenderSystem = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
   return (alpha: number) => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    for (const [id, pos] of ecs.Position) {
+    // help : mengatur urutan gambar/draw. kalau ini masih berdasarkan id. nanti bisa aku tentukan sendiri. misalnya bg di belakang, particle di depan. atau ketika ada player, diatur berdasarkan posisi y
+    for (const id of ecs.entities) {
+      const pos = ecs.Position.get(id);
       const size = ecs.Size.get(id);
       const prev = ecs.PrevPosition.get(id);
       const render = ecs.Renderable.get(id);
 
-      if (!render || !prev || !size) continue;
+      if (!pos || !prev || !size || !render) continue;
 
       const x = prev.x + (pos.x - prev.x) * alpha;
       const y = prev.y + (pos.y - prev.y) * alpha;
@@ -52,7 +54,7 @@ const RenderSystem = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
         case 'text':
           if (!size) break;
 
-          for (const d of render.data) {
+          for (const d of render.datas) {
             ctx.drawImage(
               render.atlas,
               d.fx,

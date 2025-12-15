@@ -4,7 +4,7 @@ interface baseEntity extends Position {
   ecs: ECS;
 }
 
-export interface CreateRectOption extends baseEntity {
+export interface CreateRect extends baseEntity {
   w: number;
   h: number;
   vx?: number;
@@ -12,14 +12,14 @@ export interface CreateRectOption extends baseEntity {
   color?: string;
 }
 
-export interface CreateArcOption extends baseEntity {
+export interface CreateArc extends baseEntity {
   radius: number;
   vx?: number;
   vy?: number;
   color?: string;
 }
 
-export interface CreateImageOption extends baseEntity {
+export interface CreateImage extends baseEntity {
   src: string;
   vx?: number;
   vy?: number;
@@ -29,7 +29,7 @@ export interface CreateImageOption extends baseEntity {
   frameV?: number;
 }
 
-export interface CreateTextOption extends baseEntity {
+export interface CreateText extends baseEntity {
   text: string;
   maxW?: number;
   scale?: number;
