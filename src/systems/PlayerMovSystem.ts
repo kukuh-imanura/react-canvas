@@ -1,24 +1,25 @@
 import type { ECS } from '../types/ecs';
 
-// help // fix : bagaimana kita tau player mana yang digerakkan?
-const PlayerMovementSystem = (ecs: ECS) => {
+const PlayerMovSystem = (ecs: ECS) => {
   const speed = 100;
 
-  return (dt: number) => {
-    for (const [id] of ecs.PlayerTag) {
-      const vel = ecs.Velocity.get(id);
-      const input = ecs.Input.get(id);
-      if (!vel || !input) continue;
+  return (_dt: number) => {
+    for (const [id, input] of ecs.Input) {
+      let movX = input.movX;
+      let movY = input.movY;
 
-      vel.vx = 0;
-      vel.vy = 0;
+      if (movX && movY) {
+        const mov = Math.sqrt(Math.pow(movX, 2) + Math.pow(movY, 2));
 
-      if (input.up) vel.vy -= speed;
-      if (input.down) vel.vy += speed;
-      if (input.left) vel.vx -= speed;
-      if (input.right) vel.vx += speed;
+        movX = movX / mov;
+        movY = movY / mov;
+      }
+
+      const vx = movX * speed;
+      const vy = movY * speed;
+
+      ecs.Velocity.set(id, { vx, vy });
     }
   };
 };
-
-export default PlayerMovementSystem;
+export default PlayerMovSystem;

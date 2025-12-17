@@ -23,22 +23,29 @@ export interface TextData {
   y: number;
 }
 
-export type Renderable =
-  | { type: 'rect'; color?: string }
-  | { type: 'circle'; radius: number; color?: string }
-  | {
-      type: 'image';
-      image: HTMLImageElement;
-      scale: number;
-      fx: number;
-      fy: number;
-    }
-  | {
-      type: 'text';
-      atlas: HTMLImageElement;
-      scale: number;
-      datas: TextData[];
-    };
+interface Rect {
+  type: 'rect';
+  color?: string;
+}
+interface Arc {
+  type: 'arc';
+  radius: number;
+  color?: string;
+}
+interface Image {
+  type: 'image';
+  image: HTMLImageElement;
+  scale: number;
+  fx: number;
+  fy: number;
+}
+interface Text {
+  type: 'text';
+  atlas: HTMLImageElement;
+  scale: number;
+  datas: TextData[];
+}
+export type Renderable = Rect | Arc | Image | Text;
 
 export interface PlayerTag {
   isPlayer: boolean;
@@ -53,11 +60,21 @@ export interface StaticBody {
 }
 
 export interface Input {
-  up?: boolean;
-  down?: boolean;
-  left?: boolean;
-  right?: boolean;
-  click?: boolean;
+  movX: number;
+  movY: number;
+  dash: boolean;
+  interact: boolean;
+  attack: boolean;
+}
+
+export interface InputMap {
+  up: string;
+  down: string;
+  left: string;
+  right: string;
+  dash: string;
+  interact: string;
+  attack: string;
 }
 
 export interface ECS {
@@ -81,6 +98,7 @@ export interface ECS {
   StaticBody: Map<number, StaticBody>;
 
   Input: Map<number, Input>;
+  InputMap: Map<number, InputMap>;
 
   // Terrain: Map<string, any>;
   // Player?: { id: number };

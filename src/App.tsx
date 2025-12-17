@@ -9,8 +9,6 @@ import ECS from './systems/ECS';
 import MainScene from './scenes/MainScene';
 import InputSystem from './systems/InputSystem';
 import PlayerMovementSystem from './systems/PlayerMovSystem';
-import setupInput from './utils/setupInput';
-// import InterfaceScene from './scenes/InterfaceScene';
 
 const App = () => {
   const { ref, ctx } = useCanvas();
@@ -24,7 +22,8 @@ const App = () => {
 
     // system
     ecs.addSystem(PrevPosSystem(ecs));
-    ecs.addSystem(InputSystem(ecs, setupInput()));
+    // ecs.addSystem(InputSystem(ecs, setupInput()));
+    ecs.addSystem(InputSystem(ecs));
     ecs.addSystem(PlayerMovementSystem(ecs));
     ecs.addSystem(MovSystem(ecs));
 

@@ -6,9 +6,18 @@ const createPlayer = (options: CreateImage) => {
 
   const id = createImage(options);
 
-  ecs.Velocity.set(id, { vx: vx ?? 0, vy: vy ?? 0 });
+  // ecs.Velocity.set(id, { vx: vx ?? 0, vy: vy ?? 0 });
   ecs.PlayerTag.set(id, { isPlayer: true });
-  ecs.Input.set(id, {});
+
+  ecs.InputMap.set(id, {
+    up: 'KeyW',
+    down: 'KeyS',
+    left: 'KeyA',
+    right: 'KeyD',
+    dash: '',
+    interact: '',
+    attack: '',
+  });
 
   return id;
 };

@@ -2,6 +2,7 @@ import type {
   ECS as ECS_Type,
   EnemyTag,
   Input,
+  InputMap,
   PlayerTag,
   Position,
   Renderable,
@@ -22,11 +23,13 @@ const ECS = (): ECS_Type => {
 
   const Renderable = new Map<number, Renderable>();
 
+  // help : Kenapa tagnya berbeda komponen? dantidak 1 komponen saja? pro/con?
   const PlayerTag = new Map<number, PlayerTag>();
   const EnemyTag = new Map<number, EnemyTag>();
   const StaticBody = new Map<number, StaticBody>();
 
   const Input = new Map<number, Input>();
+  const InputMap = new Map<number, InputMap>();
 
   const systems: ((dt: number) => void)[] = [];
 
@@ -60,6 +63,7 @@ const ECS = (): ECS_Type => {
     StaticBody,
 
     Input,
+    InputMap,
 
     // Terrain: new Map(),
   };

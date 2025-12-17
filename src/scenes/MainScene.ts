@@ -2,7 +2,7 @@ import createImage from '../entities/factory/createImage';
 import createPlayer from '../entities/createPlayer';
 import type { ECS } from '../types/ecs';
 
-const MainScene = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
+const MainScene = (ecs: ECS, _ctx: CanvasRenderingContext2D) => {
   createImage({
     ecs,
     src: '/sprout-land/chars/Free Chicken Sprites.png',

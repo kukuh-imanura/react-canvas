@@ -22,7 +22,7 @@ const RenderSystem = (ecs: ECS, ctx: CanvasRenderingContext2D) => {
           ctx.fillRect(Math.round(x), Math.round(y), size.w, size.h);
           break;
 
-        case 'circle':
+        case 'arc':
           render.radius = render.radius || size.h / 2 || size.w / 2;
 
           ctx.beginPath();

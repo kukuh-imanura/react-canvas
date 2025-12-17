@@ -6,7 +6,7 @@ const createArc = (options: CreateArc) => {
 
   const id = ecs.createEntity();
 
-  ecs.Renderable.set(id, { type: 'circle', radius, color });
+  ecs.Renderable.set(id, { type: 'arc', radius, color });
   ecs.Position.set(id, { x, y });
   ecs.PrevPosition.set(id, { x, y });
   ecs.Size.set(id, { w: s, h: s });
