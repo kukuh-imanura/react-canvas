@@ -3,12 +3,9 @@ import Canvas from './canvases/Canvas';
 import gameLoops from './systems/gameLoops';
 import useCanvas from './canvases/useCanvas';
 import RenderSystem from './systems/RenderSystem';
-import MovSystem from './systems/MovSystem';
-import PrevPosSystem from './systems/PrevPosSystem';
 import ECS from './systems/ECS';
-import MainScene from './scenes/MainScene';
-import InputSystem from './systems/InputSystem';
-import PlayerMovementSystem from './systems/PlayerMovSystem';
+import Scenes from './scenes';
+import Systems from './systems';
 
 const App = () => {
   const { ref, ctx } = useCanvas();
@@ -17,15 +14,12 @@ const App = () => {
     if (!ctx) return;
 
     const ecs = ECS();
-    MainScene(ecs, ctx);
-    // InterfaceScene(ecs, ctx);
+
+    // scenes
+    Scenes(ecs, ctx);
 
     // system
-    ecs.addSystem(PrevPosSystem(ecs));
-    // ecs.addSystem(InputSystem(ecs, setupInput()));
-    ecs.addSystem(InputSystem(ecs));
-    ecs.addSystem(PlayerMovementSystem(ecs));
-    ecs.addSystem(MovSystem(ecs));
+    Systems(ecs);
 
     const loop = gameLoops({
       draw: RenderSystem(ecs, ctx),
